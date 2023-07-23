@@ -1,0 +1,12 @@
+.align-btn{
+    padding-top: 2rem;
+    padding-bottom: 0.3em;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+
+.head-title{
+    font-size: "36px";
+    line-height: "44px";
+}
