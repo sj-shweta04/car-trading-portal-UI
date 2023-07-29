@@ -1,5 +1,5 @@
 import Search from '../Search/Search'
-import './home.css'
+import './style.css'
 const Home = () => {
   return (
     <>  
