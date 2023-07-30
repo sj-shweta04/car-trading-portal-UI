@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 
 import { Menu as MenuIcon, Adb as AdbIcon, CarRentalTwoTone as CarRentalTwoToneIcon } from '@mui/icons-material';
+import { Link } from "react-router-dom";
 import { Search } from '../Search/Search';
 
 
@@ -27,13 +28,15 @@ function Navbar() {
     React.useEffect(()=>{
         console.log('selected',selectedCityNav);
     },[selectedCityNav])
+    
     const handleSelectCityNav=(event,newval)=>{
         setSelectedCityNav(newval)
    }
   
+   const LinkStyle = {color:'inherit',textDecoration: 'none'}
 
     const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['car1', 'car2', 'car3']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
-        'Buy/Sell Car', 'About Us'];
+        'Buy/Sell Car', <Link style={LinkStyle} key={'about'} to={`about`}>About</Link>];
     const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
     const handleOpenNavMenu = (event) => {
@@ -52,7 +55,7 @@ function Navbar() {
     };
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="relative">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <CarRentalTwoToneIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -110,7 +113,7 @@ function Navbar() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <CarRentalTwoToneIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -127,7 +130,7 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Car-Trading
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
