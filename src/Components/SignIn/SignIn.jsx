@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -38,7 +38,10 @@ export default function SignInSide() {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
 
-    
+    useEffect(()=>{
+     setEmailError('')
+     setPasswordError('')
+    },[signUp])
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
