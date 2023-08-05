@@ -150,8 +150,10 @@ function Navbar() {
                         ))}
                     </Box>
 
-                    { !login ? <MenuItem key={''} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">LOGIN / SIGNUP</Typography>
+                    { !login ? <MenuItem key={''}>
+                        <Link style={LinkStyle} to={`/signin`}>
+                        <Typography textAlign="center">LOGIN/SIGNUP</Typography>
+                        </Link>
                     </MenuItem> :
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
