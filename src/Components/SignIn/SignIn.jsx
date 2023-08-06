@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LoginContext } from '../Context/LoginContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 function Copyright(props) {
     return (
@@ -39,10 +41,15 @@ export default function SignInSide() {
     const [firstNameError, setFirstNameError] = useState('');
     const [lastNameError, setLastNameError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
 
-    const { login, setLogin, setUser, user } = useContext(LoginContext)
+    const { login, setLogin, setUser, user, loading, setLoading } = useContext(LoginContext)
 
     const navigate = useNavigate()
+
+    const handleBackgroundImageLoad = () => {
+        setBackgroundImageLoaded(true);
+    };
 
 
     useEffect(() => {
@@ -81,6 +88,7 @@ export default function SignInSide() {
             setPasswordError('');
         }
 
+        setLoading(true)
         axios.get('https://reqres.in/api/login', {
             email: email,
             password: password
@@ -88,6 +96,7 @@ export default function SignInSide() {
             if (response?.status === 200) {
                 setLogin(true);
                 setUser(response.data.data[0].name);
+                setLoading(false)
                 navigate('/')
                 return
             }
@@ -183,8 +192,8 @@ export default function SignInSide() {
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                    }}
-                />
+                        }}
+                    />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                     <Box
                         sx={{
@@ -294,14 +303,15 @@ export default function SignInSide() {
                                         control={<Checkbox value="remember" color="primary" />}
                                         label="Remember me" />
                                 </>}
-                            <Button
+                            <LoadingButton
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                loading={loading}
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 Sign {signUp ? "Up" : "In"}
-                            </Button>
+                            </LoadingButton>
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
