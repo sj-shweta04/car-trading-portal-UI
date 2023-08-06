@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
     AppBar,
     Box,
@@ -13,29 +13,34 @@ import {
     MenuItem,
 } from '@mui/material';
 
-import { Menu as MenuIcon, Adb as AdbIcon, CarRentalTwoTone as CarRentalTwoToneIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, CarRentalTwoTone as CarRentalTwoToneIcon } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import { Search } from '../Search/Search';
+import { LoginContext } from '../Context/LoginContext';
 
 
 
 
 function Navbar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [selectedCityNav, setSelectedCityNav] = React.useState()
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [selectedCityNav, setSelectedCityNav] = useState()
 
-    React.useEffect(()=>{
-        console.log('selected',selectedCityNav);
-    },[selectedCityNav])
-    
-    const handleSelectCityNav=(event,newval)=>{
+    const { login } = useContext(LoginContext);
+    const { setLogin } = useContext(LoginContext)
+
+    useEffect(() => {
+        console.log('selected', selectedCityNav);
+    }, [selectedCityNav])
+
+
+    const handleSelectCityNav = (event, newval) => {
         setSelectedCityNav(newval)
-   }
-  
-   const LinkStyle = {color:'inherit',textDecoration: 'none'}
+    }
 
-    const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['car1', 'car2', 'car3']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
+    const LinkStyle = { color: 'inherit', textDecoration: 'none' }
+
+    const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['city1', 'city2', 'city3']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
         'Buy/Sell Car', <Link style={LinkStyle} key={'about'} to={`about`}>About</Link>];
     const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -74,7 +79,7 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        Car-Trading
+                        Trade-Cars
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -130,7 +135,7 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        Car-Trading
+                        Trade-Cars
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
@@ -143,36 +148,42 @@ function Navbar() {
                             </Button>
                         ))}
                     </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                    {console.log('loginIn Nav',login)}
+                    { !login ? <MenuItem key={''}>
+                      
+                        <Link style={LinkStyle} to={`/signin`}>
+                        <Typography textAlign="center">LOGIN/SIGNUP</Typography>
+                        </Link>
+                    </MenuItem> :
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src="" />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center">{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>}
                 </Toolbar>
             </Container>
         </AppBar>

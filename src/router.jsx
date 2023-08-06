@@ -5,6 +5,7 @@ import App from "./App";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import AboutUs from "./Components/AboutPage/AboutUs";
 import Home from "./Components/Home/Home";
+import SignIn from "./Components/SignIn/SignIn";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+        errorElement: <ErrorPage />
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
         errorElement: <ErrorPage />
       }
 
