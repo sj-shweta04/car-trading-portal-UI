@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,9 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LoginContext } from '../Context/LoginContext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
     return (
@@ -37,15 +40,19 @@ export default function SignInSide() {
     const [lastNameError, setLastNameError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
+    const { login, setLogin, setUser, user } = useContext(LoginContext)
 
-    useEffect(()=>{
-     setEmailError('')
-     setPasswordError('')
-    },[signUp])
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+        setEmailError('')
+        setPasswordError('')
+    }, [signUp])
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
- 
+
     const handleLogin = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -74,10 +81,21 @@ export default function SignInSide() {
             setPasswordError('');
         }
 
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        axios.get('https://reqres.in/api/login', {
+            email: email,
+            password: password
+        }).then((response) => {
+            if (response?.status === 200) {
+                setLogin(true);
+                setUser(response.data.data[0].name);
+                navigate('/')
+                return
+            }
+
+        }).catch((e) => {
+            console.log('err', e);
+        })
+
     };
 
     const handleSignUp = (event) => {
@@ -109,7 +127,7 @@ export default function SignInSide() {
             setLastNameError('');
         }
 
-        
+
         // Perform email validation 
         if (!email) {
             setEmailError('Email is required');
@@ -133,18 +151,18 @@ export default function SignInSide() {
         }
 
 
-        if(!confirmPassword){
+        if (!confirmPassword) {
             setConfirmPasswordError('please confirm password');
             return;
-        }else if(confirmPassword !== password){
+        } else if (confirmPassword !== password) {
             setConfirmPasswordError('entered password not match');
             return;
-        }else{
+        } else {
             setConfirmPasswordError('')
         }
 
         console.log({
-            email,password,firstName,lastName
+            email, password, firstName, lastName
         });
 
     }

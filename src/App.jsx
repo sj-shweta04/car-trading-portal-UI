@@ -5,10 +5,11 @@ import { Outlet } from "react-router-dom";
 
 function App() {
 
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(false);
+  const [user, setUser] = useState(null)
   return (
     <>
-      <LoginContext.Provider value={{ login, setLogin }}>
+      <LoginContext.Provider value={{ login, setLogin, user, setUser}}>
         <Navbar />
         <Outlet />
       </LoginContext.Provider>

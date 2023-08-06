@@ -32,8 +32,7 @@ function Navbar() {
     useEffect(() => {
         console.log('selected', selectedCityNav);
     }, [selectedCityNav])
-    setLogin()
-    console.log('Login', login);
+
 
     const handleSelectCityNav = (event, newval) => {
         setSelectedCityNav(newval)
@@ -41,7 +40,7 @@ function Navbar() {
 
     const LinkStyle = { color: 'inherit', textDecoration: 'none' }
 
-    const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['car1', 'car2', 'car3']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
+    const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['city1', 'city2', 'city3']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
         'Buy/Sell Car', <Link style={LinkStyle} key={'about'} to={`about`}>About</Link>];
     const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -149,8 +148,9 @@ function Navbar() {
                             </Button>
                         ))}
                     </Box>
-
+                    {console.log('loginIn Nav',login)}
                     { !login ? <MenuItem key={''}>
+                      
                         <Link style={LinkStyle} to={`/signin`}>
                         <Typography textAlign="center">LOGIN/SIGNUP</Typography>
                         </Link>
@@ -158,7 +158,7 @@ function Navbar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    <Avatar alt="Remy Sharp" src="" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
