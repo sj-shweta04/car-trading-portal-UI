@@ -10,7 +10,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   return (
     <>
-      <LoginContext.Provider value={{ login, setLogin, user, setUser, loading, setLoading}}>
+      <LoginContext.Provider 
+      value={{ login, setLogin, user, setUser, loading, setLoading}}>
         <Navbar />
         <Outlet />
       </LoginContext.Provider>
