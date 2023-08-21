@@ -93,6 +93,7 @@ export default function SignInSide() {
             email: email,
             password: password
         }).then((response) => {
+            console.log(response);
             if (response?.status === 200) {
                 setLogin(true);
                 setUser(response.data.data[0].name);
