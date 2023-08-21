@@ -89,13 +89,14 @@ export default function SignInSide() {
         }
 
         setLoading(true)
-        axios.get('https://reqres.in/api/login', {
+        axios.post('http://localhost:8080/api/loginUser', {
             email: email,
             password: password
         }).then((response) => {
-            if (response?.status === 200) {
+            console.log(response.status)
+            if (response.status === 200) {
                 setLogin(true);
-                setUser(response.data.data[0].name);
+            //    setUser(response.data.data[0].name);
                 setLoading(false)
                 navigate('/')
                 return
