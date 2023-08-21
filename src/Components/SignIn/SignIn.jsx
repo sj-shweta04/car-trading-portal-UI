@@ -175,6 +175,20 @@ export default function SignInSide() {
             email, password, firstName, lastName
         });
 
+        axios.post('http://localhost:8080/api/registerUser', {
+            firstName: firstName,
+            lastName :lastName,
+            email: email,
+            password: password     
+        }).then((response) => {
+            console.log(response)
+            if(response.status===200){
+                setSignUp(!signUp)
+            }
+    }).catch((e) => {
+        console.log('err', e);
+    })
+
     }
 
     return (
