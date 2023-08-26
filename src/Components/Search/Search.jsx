@@ -39,8 +39,8 @@ const SearchPanel = () => {
 
     }}>
       <h3 className='head-title'>Find Your Dream Car</h3>
-      <Search id={'searchByCityHome'} label={'Search By City'} options={['car1', 'car2', 'car3']} style={style} onChange={handleAutocompleteChange} />
-      <Search id={'searchByBrand'} label={'Search By Brand'} options={['city1', 'city2', 'city3']} style={style} onChange={handleAutocompleteChange} />
+      <Search id={'searchByCityHome'} label={'Search By City'} options={['pune', 'mumbai', 'satara','nagpur','delhi']} style={style} onChange={handleAutocompleteChange} />
+      <Search id={'searchByBrand'} label={'Search By Brand'} options={['Maruti Suzuki', 'Kia', 'Hyundai','BMW','Mahindra']} style={style} onChange={handleAutocompleteChange} />
       <div className='align-btn'>
         <Button variant="contained" onClick={doSearch} sx={{ color: 'text.primary' }}>Search</Button>
       </div>
