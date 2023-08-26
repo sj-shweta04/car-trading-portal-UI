@@ -89,14 +89,14 @@ export default function SignInSide() {
         }
 
         setLoading(true)
-        axios.get('https://reqres.in/api/login', {
+        axios.post('http://localhost:8080/api/loginUser', {
             email: email,
             password: password
         }).then((response) => {
             console.log(response);
             if (response?.status === 200) {
                 setLogin(true);
-                setUser(response.data.data[0].name);
+            //    setUser(response.data.data[0].name);
                 setLoading(false)
                 navigate('/')
                 return
@@ -174,6 +174,20 @@ export default function SignInSide() {
         console.log({
             email, password, firstName, lastName
         });
+
+        axios.post('http://localhost:8080/api/registerUser', {
+            firstName: firstName,
+            lastName :lastName,
+            email: email,
+            password: password     
+        }).then((response) => {
+            console.log(response)
+            if(response.status===200){
+                setSignUp(!signUp)
+            }
+    }).catch((e) => {
+        console.log('err', e);
+    })
 
     }
 
