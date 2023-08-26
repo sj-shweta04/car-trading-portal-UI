@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 
 import { Menu as MenuIcon, CarRentalTwoTone as CarRentalTwoToneIcon } from '@mui/icons-material';
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Search } from '../Search/Search';
 import { LoginContext } from '../Context/LoginContext';
 
@@ -29,6 +29,8 @@ function Navbar() {
     const { login } = useContext(LoginContext);
     const { setLogin } = useContext(LoginContext)
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         console.log('selected', selectedCityNav);
     }, [selectedCityNav])
@@ -36,11 +38,13 @@ function Navbar() {
 
     const handleSelectCityNav = (event, newval) => {
         setSelectedCityNav(newval)
+        navigate(`/cars/city/${newval}`)
+       
     }
 
     const LinkStyle = { color: 'inherit', textDecoration: 'none' }
 
-    const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['city1', 'city2', 'city3']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
+    const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['pune', 'mumbai', 'satara','nagpur','delhi']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
         'Buy/Sell Car', <Link style={LinkStyle} key={'about'} to={`about`}>About</Link>];
     const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 

@@ -6,7 +6,9 @@ import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import AboutUs from "./Components/AboutPage/AboutUs";
 import Home from "./Components/Home/Home";
 import SignIn from "./Components/SignIn/SignIn";
-import Cars from "./Components/Cars/Cars";
+import Cars from "./Components/ViewCars/Cars";
+import SearchByBrand from "./Components/SearchBy/SearchByBrand";
+import SearchByCity from "./Components/SearchBy/SearchByCity";
 
 export const router = createBrowserRouter([
   {
@@ -32,8 +34,17 @@ export const router = createBrowserRouter([
         path:"/cars",
         element:<Cars/>,
         errorElement: <ErrorPage />
+      },
+      {
+        path:"/cars/city/:cityName",
+        element:<SearchByCity/>,
+        errorElement: <ErrorPage />
+      },
+      {
+        path:"/cars/brand/:brandName",
+        element:<SearchByBrand/>,
+        errorElement: <ErrorPage />
       }
-
     ],
   },
 ]);
