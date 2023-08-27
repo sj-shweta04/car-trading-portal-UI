@@ -8,7 +8,7 @@ const SearchByBrand = () => {
     const [cars, setCars] = useState();
     const { brandName } = useParams()
     useEffect(() => {
-      axios.get(`http://localhost:8080/api/brand/${brandName}`)
+      axios.get(`http://localhost:8080/api/cars/brand/${brandName}`)
         .then((response) => {
           setCars(response.data)
         })
@@ -18,7 +18,7 @@ const SearchByBrand = () => {
     );
     return (
       <div>
-        <Cars cars={cars} />
+        <Cars cars={cars} heading={`Cars by ${brandName}`}/>
       </div>
     )
 }
