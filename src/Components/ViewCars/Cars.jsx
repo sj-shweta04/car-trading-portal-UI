@@ -22,7 +22,7 @@ export default function Cars({ cars, heading }) {
                                         <CardMedia
                                             component="img"
                                             height="140"
-                                            image={'D:\Project DAC\Car Image\Dzire grey.jpg'}
+                                            image={`http://localhost:8080/api/cars/images/${c.carImage}`}
                                             alt="Car info"
                                         />
                                         <CardContent>
@@ -45,7 +45,7 @@ export default function Cars({ cars, heading }) {
                                     </CardActionArea>
                                     <CardActions>
                                         <Button size="small" color="primary">
-                                            Buy
+                                            View
                                         </Button>
                                     </CardActions>
                                 </Card>

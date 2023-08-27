@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -19,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
+
 
 function Copyright(props) {
     return (
@@ -43,6 +45,7 @@ export default function SignInSide() {
     const [firstNameError, setFirstNameError] = useState('');
     const [lastNameError, setLastNameError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [showPassError, setShowPassError] = useState(false)
     const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
 
     const { login, setLogin, setUser, user, loading, setLoading } = useContext(LoginContext)
@@ -105,8 +108,9 @@ export default function SignInSide() {
             }
 
         }).catch((e) => {
-            
+            setLoading(false)
             console.log('err', e);
+            setShowPassError(true)
         })
 
     };
@@ -330,6 +334,7 @@ export default function SignInSide() {
                             >
                                 Sign {signUp ? "Up" : "In"}
                             </LoadingButton>
+                            {showPassError && <Alert severity="error">Incorrect email or password please retry</Alert>}
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
