@@ -5,14 +5,14 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 
 
-export default function Cars({ cars }) {
+export default function Cars({ cars, heading }) {
 
     return (
         <>
             {cars &&
                 <>
                     <Typography gutterBottom mt={2} ml={2} variant="h4" component="div">
-                        All Cars
+                        {heading}
                     </Typography>
                     <Grid container spacing={2} alignItems="center" justifyContent="center">
                         {cars.map((c) => (

@@ -7,7 +7,7 @@ const SearchByCity = () => {
   const [cars, setCars] = useState();
   const { cityName } = useParams()
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/cars/${cityName}`)
+    axios.get(`http://localhost:8080/api/cars/city/${cityName}`)
       .then((response) => {
         setCars(response.data)
       })
@@ -17,7 +17,7 @@ const SearchByCity = () => {
   );
   return (
     <div>
-      <Cars cars={cars} />
+      <Cars cars={cars} heading={`Cars in ${cityName}`}/>
     </div>
   )
 }
