@@ -9,6 +9,7 @@ import SignIn from "./Components/SignIn/SignIn";
 import Cars from "./Components/ViewCars/Cars";
 import SearchByBrand from "./Components/SearchBy/SearchByBrand";
 import SearchByCity from "./Components/SearchBy/SearchByCity";
+import SellCar from "./Components/SellCar/SellCar";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,11 @@ export const router = createBrowserRouter([
       {
         path:"/cars/brand/:brandName",
         element:<SearchByBrand/>,
+        errorElement: <ErrorPage />
+      },
+      {
+        path:"sellcar",
+        element:<SellCar/>,
         errorElement: <ErrorPage />
       }
     ],

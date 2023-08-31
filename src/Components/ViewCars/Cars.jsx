@@ -3,19 +3,24 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
+import { useState } from 'react';
+import Car from './Car';
 
 
 export default function Cars({ cars, heading }) {
+
+    const [viewCar, setViewCar] = useState(false)
+    const [carDetails, setCarDetails] = useState()
 
     return (
         <>
             {cars &&
                 <>
-                    <Typography gutterBottom mt={2} ml={2} variant="h4" component="div">
-                        {heading}
-                    </Typography>
+                        <Typography gutterBottom mt={2} ml={2} variant="h4" component="div">
+                            {heading}
+                        </Typography>
                     <Grid container spacing={2} alignItems="center" justifyContent="center">
-                        {cars.map((c) => (
+                        {!viewCar ? cars.map((c) => (
                             <Grid item key={c.car_id} xs={12} sm={4} md={'auto'} mt={3}>
                                 <Card sx={{ maxWidth: 345 }}>
                                     <CardActionArea>
@@ -44,13 +49,16 @@ export default function Cars({ cars, heading }) {
                                         </CardContent>
                                     </CardActionArea>
                                     <CardActions>
-                                        <Button size="small" color="primary">
+                                        <Button size="small" color="primary" onClick={() => {
+                                            setCarDetails(c);
+                                            setViewCar(true)
+                                        }}>
                                             View
                                         </Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
-                        ))}
+                        )) : <Car carDetails={carDetails} close={setViewCar} />}
                     </Grid>
                 </>
             }
