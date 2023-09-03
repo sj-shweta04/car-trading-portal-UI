@@ -16,7 +16,7 @@ const ViewCars = () => {
   return (
     <div>
         
-        <Cars cars={cars} heading={'All Cars'}/>
+        <Cars cars={cars}/>
         
     </div>
   )

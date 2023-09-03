@@ -60,6 +60,7 @@ export default function SignInSide() {
     useEffect(() => {
         setEmailError('')
         setPasswordError('')
+        setShowPassError(false)
     }, [signUp])
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -98,10 +99,11 @@ export default function SignInSide() {
             email: email,
             password: password
         }).then((response) => {
-            console.log(response);
+            console.log(response.data.data);
             if (response?.status === 200) {
+                console.log(response.data);
                 setLogin(true);
-            //    setUser(response.data.data[0].name);
+                setUser(response.data);
                 setLoading(false)
                 navigate('/')
                 return
@@ -184,17 +186,17 @@ export default function SignInSide() {
 
         axios.post('http://localhost:8080/api/registerUser', {
             firstName: firstName,
-            lastName :lastName,
+            lastName: lastName,
             email: email,
-            password: password     
+            password: password
         }).then((response) => {
             console.log(response)
-            if(response.status===200){
+            if (response.status === 200) {
                 setSignUp(!signUp)
             }
-    }).catch((e) => {
-        console.log('err', e);
-    })
+        }).catch((e) => {
+            console.log('err', e);
+        })
 
     }
 
@@ -214,8 +216,8 @@ export default function SignInSide() {
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        }}
-                    />
+                    }}
+                />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                     <Box
                         sx={{
