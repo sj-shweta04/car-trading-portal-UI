@@ -16,9 +16,13 @@ export default function Cars({ cars, heading }) {
         <>
             {cars &&
                 <>
-                        <Typography gutterBottom mt={2} ml={2} variant="h4" component="div">
-                            {heading}
-                        </Typography>
+                    <Typography gutterBottom mt={2} sx={{
+                        fontSize: '35px',
+                        fontWeight: '500',
+                        color: '#553c9a'
+                    }} ml={2} variant="h4" component="div">
+                        {heading}
+                    </Typography>
                     <Grid container spacing={2} alignItems="center" justifyContent="center">
                         {!viewCar ? cars.map((c) => (
                             <Grid item key={c.car_id} xs={12} sm={4} md={'auto'} mt={3}>

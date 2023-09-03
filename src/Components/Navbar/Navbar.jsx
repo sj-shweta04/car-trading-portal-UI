@@ -42,11 +42,21 @@ function Navbar() {
        
     }
 
+    const handleLogin = ()=>{
+        if(!login){
+        alert('You need to login first')
+        return
+        }
+        return
+    }
+
     const LinkStyle = { color: 'inherit', textDecoration: 'none' }
 
     const pages = [<Search id={'searchByCityNav'} label={'Search By City'} onChange={handleSelectCityNav} options={['pune', 'mumbai', 'satara','nagpur','delhi']} key={'searchByCityNav'} style={{ width: 200, pt: 0, pl: 1, pb: 0, color: 'red' }} textStyle={{ color: 'red' }} />,
-        'Buy/Sell Car', <Link style={LinkStyle} key={'about'} to={`about`}>About</Link>];
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    <Link style={LinkStyle} onClick={handleLogin} key={'sellCar'} to={login ? `sellcar`:'#'}>Sell Car</Link>, <Link style={LinkStyle} key={'about'} to={`about`}>About</Link>];
+    const settings = ['Profile', 'Account', 'Dashboard', <Link key={'logout'} onClick={()=>{
+        setLogin(false);
+    }} href="/" >Logout</Link>];
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
